@@ -16,7 +16,10 @@ public class GameImpl implements Game {
 //    == fields ==
     @Autowired
     private NumberGenerator numberGenerator;
-    private int guessCount = 10;
+
+    @Autowired
+    @GuessCount
+    private int guessCount;
     private int guess;
     private int number;
     private int smallest;
@@ -24,10 +27,6 @@ public class GameImpl implements Game {
     private int remainingGuesses;
     private boolean validNumberRange = true;
 
-////    == constructors ==
-//    public GameImpl(NumberGenerator numberGenerator) {
-//        this.numberGenerator = numberGenerator;
-//    }
 
 //    == init ==
     @PostConstruct
@@ -47,10 +46,6 @@ public class GameImpl implements Game {
     }
 
     //    == public methods ==
-//    public void setNumberGenerator(NumberGenerator numberGenerator){
-//        this.numberGenerator = numberGenerator;
-//    }
-
     @Override
     public int getNumber() {
         return number;
@@ -79,6 +74,11 @@ public class GameImpl implements Game {
     @Override
     public int getRemainingGuesses() {
         return remainingGuesses;
+    }
+
+    @Override
+    public int getGuessCount() {
+        return guessCount;
     }
 
     @Override

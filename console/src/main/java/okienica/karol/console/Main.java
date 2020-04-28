@@ -1,6 +1,6 @@
 package okienica.karol.console;
 
-import okienica.karol.AppConfig;
+import okienica.karol.config.AppConfig;
 import okienica.karol.MessageGenerator;
 import okienica.karol.NumberGenerator;
 import org.slf4j.Logger;
