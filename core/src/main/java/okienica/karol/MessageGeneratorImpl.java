@@ -3,28 +3,35 @@ package okienica.karol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
-public class MessageGeneratorImpl implements MessageGenerator{
+@Component
+public class MessageGeneratorImpl implements MessageGenerator {
 
-//    == constants ==
+    //    == constants ==
     private static final Logger log = LoggerFactory.getLogger(MessageGeneratorImpl.class);
 
-//    == fields ==
-    @Autowired
-    private Game game;
+    //    == fields ==
+    private final Game game;
 
-//    == init ==
+    //    == constructors ==
+    @Autowired
+    public MessageGeneratorImpl(Game game) {
+        this.game = game;
+    }
+
+    //    == init ==
     @PostConstruct
-    public void init(){
+    public void init() {
         log.info("game = {}", game);
     }
 
-// == public methods ==
+    // == public methods ==
     @Override
     public String getMainMessage() {
-        return "Number is between "+
+        return "Number is between " +
                 game.getSmallest() +
                 " and " +
                 game.getBiggest() +
@@ -34,24 +41,24 @@ public class MessageGeneratorImpl implements MessageGenerator{
     @Override
     public String getResultMessage() {
 
-        if(game.isGameWon()){
+        if (game.isGameWon()) {
             return "You guessed it! The number was " + game.getNumber();
-        }else if(game.isGameLost()) {
+        } else if (game.isGameLost()) {
             return "You lost! The number was " + game.getNumber();
-        }else if(!game.isValidNumberRange()){
+        } else if (!game.isValidNumberRange()) {
             return "Invalid number range!";
-        }else if(game.getRemainingGuesses() == game.getGuessCount()){
+        } else if (game.getRemainingGuesses() == game.getGuessCount()) {
             return "What is your first guess?";
-        }else{
+        } else {
             String direction = "Lower";
 
-            if(game.getGuess() < game.getNumber()){
+            if (game.getGuess() < game.getNumber()) {
                 direction = "Higher";
             }
 
-            if(game.getRemainingGuesses() > 1) {
+            if (game.getRemainingGuesses() > 1) {
                 return direction + "! You have " + game.getRemainingGuesses() + " guesses left";
-            }else if(game.getRemainingGuesses() == 1){
+            } else if (game.getRemainingGuesses() == 1) {
                 return direction + "! You have 1 guess left";
             }
 

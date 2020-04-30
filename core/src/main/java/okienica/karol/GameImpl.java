@@ -3,23 +3,23 @@ package okienica.karol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-
+@Component
 public class GameImpl implements Game {
 
-//    == constants ==
+    //    == constants ==
     private static final Logger log = LoggerFactory.getLogger(GameImpl.class);
 
-//    == fields ==
-    @Autowired
-    private NumberGenerator numberGenerator;
+    //    == fields ==
 
-    @Autowired
-    @GuessCount
-    private int guessCount;
+    private final NumberGenerator numberGenerator;
+
+    private final int guessCount;
+
     private int guess;
     private int number;
     private int smallest;
@@ -27,8 +27,14 @@ public class GameImpl implements Game {
     private int remainingGuesses;
     private boolean validNumberRange = true;
 
+    //    == constructors ==
+    @Autowired
+    public GameImpl(NumberGenerator numberGenerator, @GuessCount int guessCount) {
+        this.numberGenerator = numberGenerator;
+        this.guessCount = guessCount;
+    }
 
-//    == init ==
+    //    == init ==
     @PostConstruct
     @Override
     public void reset() {
@@ -41,7 +47,7 @@ public class GameImpl implements Game {
     }
 
     @PreDestroy
-    public void preDestory(){
+    public void preDestory() {
         log.info("in Game predestory");
     }
 
@@ -86,12 +92,12 @@ public class GameImpl implements Game {
 
         checkValidNumberRange();
 
-        if(validNumberRange){
-            if(guess > number){
+        if (validNumberRange) {
+            if (guess > number) {
                 biggest = guess - 1;
             }
 
-            if(guess < number){
+            if (guess < number) {
                 smallest = guess + 1;
             }
         }
@@ -114,8 +120,8 @@ public class GameImpl implements Game {
         return !isGameWon() && remainingGuesses <= 0;
     }
 
-//    == private methods ==
-    private void checkValidNumberRange(){
+    //    == private methods ==
+    private void checkValidNumberRange() {
         validNumberRange = (guess >= smallest) && (guess <= biggest);
     }
 }

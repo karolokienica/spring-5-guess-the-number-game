@@ -14,17 +14,22 @@ import java.util.Scanner;
 @Component
 public class ConsoleNumberGuess{
 
-//    == constants ==
+    //    == constants ==
     private static final Logger log = LoggerFactory.getLogger(ConsoleNumberGuess.class);
 
-//    == fields==
-    @Autowired
-    private Game game;
+    //    == fields==
+    private final Game game;
 
-    @Autowired
-    private MessageGenerator messageGenerator;
+    private final MessageGenerator messageGenerator;
 
-//    == events ==
+    //    == constructors ==
+    @Autowired
+    public ConsoleNumberGuess(Game game, MessageGenerator messageGenerator) {
+        this.game = game;
+        this.messageGenerator = messageGenerator;
+    }
+
+    //    == events ==
     @EventListener(ContextRefreshedEvent.class)
     public void start() {
         log.info("start() --> Container ready for use.");
