@@ -28,7 +28,7 @@ public class GameController {
 //    == request methods ==
     @GetMapping(GameMappings.PLAY)
     public String play(Model model){
-        model.addAttribute(AttributeNames.MAIN_MESSAAGE, gameService.getMainMessage());
+        model.addAttribute(AttributeNames.MAIN_MESSAGE, gameService.getMainMessage());
         model.addAttribute(AttributeNames.RESULT_MESSAGE, gameService.getResultMessage());
         log.info("model = {}", model);
 
