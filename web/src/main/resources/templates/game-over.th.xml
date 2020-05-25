@@ -1,0 +1,16 @@
+<thlogic>
+    <attr sel="#headId"
+          th:replace="~{fragments/head :: headFragment}"/>
+    <attr sel="#game-name" th:text="#{game.name}"/>
+    <attr sel="#game-over" th:text="#{game.over}"/>
+    <attr sel="#result-message"
+          th:text="${__${T(okienica.karol.util.AttributeNames).RESULT_MESSAGE}__}"/>
+    <attr sel="#restart-link"
+          th:href="@{__${T(okienica.karol.util.GameMappings).RESTART}__}"
+          th:text="#{game.restart.text}"/>
+    <attr sel="#home-link"
+          th:href="@{__${T(okienica.karol.util.GameMappings).HOME}__}"
+          th:text="#{game.home}"/>
+    <attr sel="#footerId"
+          th:replace="~{fragments/footer :: footerFragment}"/>
+</thlogic>
