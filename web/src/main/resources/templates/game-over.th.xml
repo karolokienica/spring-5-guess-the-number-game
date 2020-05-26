@@ -6,10 +6,10 @@
     <attr sel="#result-message"
           th:text="${__${T(okienica.karol.util.AttributeNames).RESULT_MESSAGE}__}"/>
     <attr sel="#restart-link"
-          th:href="@{__${T(okienica.karol.util.GameMappings).RESTART}__}"
+          th:href="@{__${T(okienica.karol.util.GameMappings).RESTART_PLAY}__}"
           th:text="#{game.restart.text}"/>
     <attr sel="#home-link"
-          th:href="@{__${T(okienica.karol.util.GameMappings).HOME}__}"
+          th:href="@{__${T(okienica.karol.util.GameMappings).RESTART_AND_REDIRECT_TO_HOME}__}"
           th:text="#{game.home}"/>
     <attr sel="#footerId"
           th:replace="~{fragments/footer :: footerFragment}"/>

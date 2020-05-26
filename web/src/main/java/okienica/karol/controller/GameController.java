@@ -46,15 +46,20 @@ public class GameController {
         return GameMappings.REDIRECT_PLAY;
     }
 
-    @GetMapping(GameMappings.RESTART)
+    @GetMapping(GameMappings.RESTART_PLAY)
     public String restart(){
         gameService.reset();
         return GameMappings.REDIRECT_PLAY;
     }
 
     @GetMapping(GameMappings.HOME)
+    public String firstRun(){
+        return ViewNames.HOME;
+    }
+
+    @GetMapping(GameMappings.RESTART_AND_REDIRECT_TO_HOME)
     public String home(){
         gameService.reset();
-        return ViewNames.HOME;
+        return GameMappings.REDIRECT_HOME;
     }
 }
